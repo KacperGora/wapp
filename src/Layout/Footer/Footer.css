@@ -1,0 +1,70 @@
+.footerContainer {
+  max-width: 140rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  color: #999;
+  left: 25rem;
+  align-items: center;
+  justify-items: center;
+  margin-top: 4.8rem;
+  align-items: start;
+  border-top: 1px solid rgba(128, 128, 128, 0.37);
+  padding-top: 2.4rem;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.brandName {
+  font-size: 1.6rem;
+  margin-top: 1.2rem;
+}
+
+.brandAddress {
+  font-size: 1rem;
+}
+.contact {
+  color: #777;
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+.contact:hover {
+  color: aquamarine;
+  text-decoration: none;
+}
+.contactContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  font-style: 1.6rem;
+  text-align: center;
+}
+
+.footerCol {
+  grid-column: 1 / span 3;
+}
+
+.footerLink {
+  color: #777;
+  text-decoration: underline;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  border-right: 1px solid rgba(128, 128, 128, 0.47);
+  border-left: 1px solid rgba(128, 128, 128, 0.47);
+  padding: 1rem;
+}
+.footerLink:hover {
+  color: aquamarine;
+  text-decoration: none;
+}
+.linkContainer {
+  margin-top: 2.4rem;
+  padding: 2.4rem;
+}

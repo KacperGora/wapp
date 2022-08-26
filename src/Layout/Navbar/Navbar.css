@@ -1,0 +1,40 @@
+.navbarContainer {
+  height: 15rem;
+  width: 140rem;
+  margin: 0 auto;
+  background-color: #008069;
+  padding: 3.2rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  z-index: 44;
+ 
+
+  /* top: 0;
+  left: 15rem; */
+}
+
+.brandContainer {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+.brandHeading {
+  font-size: 2.4rem;
+  color: rgb(255, 255, 255);
+}
+.nav-ul {
+  display: flex;
+  gap: 1rem;
+}
+.nav-ul li {
+  list-style-type: none;
+  padding-right: 2.4rem;
+  font-size: 1.6rem;
+  color: white;
+  cursor: pointer;
+  transition: all 300ms;
+}
+.nav-ul li:hover {
+ color:aquamarine
+}

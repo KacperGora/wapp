@@ -1,0 +1,72 @@
+.loginContainer {
+  max-width: 140rem;
+  margin: 0 auto;
+  background-color: #eae5e1;
+  
+  padding: 0 3.2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-content: center;
+  border-radius: 8px;
+  box-shadow: -4px 4px 10px -4px rgba(156, 156, 156, 1);
+
+}
+img {
+  align-self: flex-end;
+
+  object-fit: cover;
+  width: 100%;
+  align-items: center;
+  padding-top: 2.4rem;
+}
+
+.loginText {
+  display: flex;
+  flex-direction: column;
+  padding: 6.4rem;
+  font-size: 2.4rem;
+  justify-items: flex-start;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.402);
+  padding-bottom: 2.4rem;
+}
+.textContainer {
+  display: flex;
+  align-items: center;
+
+  gap: 1.6rem;
+  line-height: 1.6;
+}
+/* .formContainer {
+
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+} */
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  padding: 8px;
+}
+.inputBoxLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  font-size: 1.4rem;
+  text-align: right;
+}
+.actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.6rem;
+}
+.actions button {
+  width: 40%;
+  padding: 1rem;
+  cursor: pointer;
+}

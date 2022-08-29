@@ -5,10 +5,12 @@
 }
 .inputContainer input {
   border: none;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.507);
+
   background-color: #eae5e1;
   padding: 1.2rem 2.4rem;
   text-align: left;
+
   font-size: 1.6rem;
 }
 .inputContainer input:focus {
@@ -16,7 +18,13 @@
 }
 .actions {
   display: flex;
-  width: 32rem;
+  width: 36rem;
+  gap: 1.2rem;
+  justify-content: center;
+}
+.action {
+  display: grid;
+  place-content: center;
 }
 
 .lgnBtn {
@@ -29,6 +37,7 @@
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 1.2px;
+  cursor: pointer;
 }
 .lgnBtn:hover {
   background-color: #00614c;
@@ -43,6 +52,18 @@
   background-color: #008569;
   color: white;
 }
-.formContainer{
- padding-top: 0;
+.formContainer {
+  padding: 3.2rem 6.4rem;
+}
+.errorMsg, .incorrectInputs {
+  color: rgba(255, 0, 0, 0.678);
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 1.2rem;
+}
+.lgnBtn:disabled {
+  background-color: gray;
+  border: solid 1px #555
+  
 }

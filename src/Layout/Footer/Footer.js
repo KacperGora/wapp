@@ -1,39 +1,39 @@
 import React from "react";
 import Logo from "../../Assets/icons/Logo";
-import "./Footer.css";
+import classes from "./Footer.module.css";
 function Footer() {
   return (
-    <footer className="footerContainer">
-      <div className="footerCol">
-        <div className="logoContainer">
+    <footer className={classes.footerContainer}>
+      <div className={classes.footerCol}>
+        <div className={classes.logoContainer}>
           <Logo />
-          <p className="brandName">WhatsApp Clone</p>
+          <p className={classes.brandName}>WhatsApp Clone</p>
         </div>
-        <div className="contactContainer">
-          <p className="brandAddress">
+        <div className={classes.contactContainer}>
+          <p className={classes.brandAddress}>
             2923 Coal Street, Bradford, PA, Pennsylvania
           </p>
-          <a className="contact" href="tel:+6494461709">
+          <a className={classes.contact} href="tel:+6494461709">
             Telephone number: 61709
           </a>
 
-          <a className="contact" href="mailto:someone@example.com">
+          <a className={classes.contact} href="mailto:someone@example.com">
             whatsapp@clone.com
           </a>
         </div>
       </div>
-      <div className="linkContainer">
-        <a href="#" className="footerLink">
+      <div className={classes.linkContainer}>
+        <a href="#" className={classes.footerLink}>
           Legal Stuff
         </a>
       </div>
-      <div className="linkContainer">
-        <a href="#" className="footerLink">
+      <div className={classes.linkContainer}>
+        <a href="#" className={classes.footerLink}>
           Privacy
         </a>
       </div>
-      <div className="linkContainer">
-        <a href="#" className="footerLink">
+      <div className={classes.linkContainer}>
+        <a href="#" className={classes.footerLink}>
           Policy Security
         </a>
       </div>

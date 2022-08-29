@@ -1,14 +1,14 @@
 import React from "react";
 import Logo from "../../../../Assets/icons/Logo";
-import "./MainContent.css";
+import classes from "./MainContent.module.css";
 import image from "../../../../Assets/images/2211.png";
-import LoginForm from "../LoginForm/LoginForm";
+import LoginForm from "../AuthForm/AuthForm";
 function MainContent() {
   return (
-    <main className="loginContainer">
+    <main className={classes.loginContainer}>
       <div>
-        <section className="loginText">
-          <div className="textContainer">
+        <section className={classes.loginText}>
+          <div className={classes.textContainer}>
             <h2>Aby skorzystać z aplikacji</h2>
             <Logo />
           </div>
@@ -16,7 +16,7 @@ function MainContent() {
         </section>
         <LoginForm />
       </div>
-      <div className="imgContainer">
+      <div className={classes.imgContainer}>
         <img src={image} alt="Screens of app features" />
       </div>
     </main>

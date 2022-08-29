@@ -1,4 +1,4 @@
-.mainPageContainer::before {
+.MainPageContainer::before {
   content: "";
   display: block;
   width: 100%;

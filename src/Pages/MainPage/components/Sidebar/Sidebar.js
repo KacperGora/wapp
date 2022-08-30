@@ -8,13 +8,19 @@ import {
 } from "react-icons/hi";
 import ListChat from "../ListChat/ListChat";
 import Search from "../Search/Search";
-
+import { useNavigate } from "react-router-dom";
 function Sidebar() {
+  const navigate = useNavigate();
   return (
     <aside className={classes.container}>
       <div className={classes.chatTools}>
         <header className={classes.heading}>
-          <div className={classes.imgBox}>
+          <div
+            onClick={() => {
+              navigate("/profile");
+            }}
+            className={classes.imgBox}
+          >
             <img src={noImg} alt="User avatar" />
           </div>
           <div className={classes.iconsBox}>
@@ -32,8 +38,7 @@ function Sidebar() {
         <Search />
       </div>
       <div className={classes.chatList}>
-
-      <ListChat />
+        <ListChat />
       </div>
     </aside>
   );

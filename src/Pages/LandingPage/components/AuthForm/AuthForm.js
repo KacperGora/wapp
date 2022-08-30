@@ -9,12 +9,15 @@ import {
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 
 import { auth } from "../../../../firebase";
 import Spinner from "../../../../components/UI/Spinner/Spinner";
 import { useNavigate } from "react-router-dom";
 import useIsValid from "../../../../hooks/useIsValid";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../../../store/authSlice";
 function AuthForm() {
   const [nickName, setNickName] = useState("");
   const [authError, setAuthError] = useState("");
@@ -26,6 +29,7 @@ function AuthForm() {
   const [registerStatus, setRegisterStatus] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     value: email,
@@ -33,7 +37,6 @@ function AuthForm() {
     hasError: emailHasError,
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
-    reset: emailReset,
   } = useIsValid(
     (value) =>
       value.trim() !== "" &&
@@ -45,7 +48,6 @@ function AuthForm() {
     hasError: passwordHasError,
     valueChangeHandler: passwordChangeHandler,
     inputBlurHandler: passwordBlurHandler,
-    reset: passwordReset,
   } = useIsValid((value) => value.trim() !== "" && value.length > 5);
 
   useEffect(() => {
@@ -60,6 +62,7 @@ function AuthForm() {
         const logUser = await signInWithEmailAndPassword(auth, email, password);
         if (logUser) {
           navigate("/main");
+          dispatch(authActions.setUser(logUser.user));
         }
       } else if (register) {
         const newUser = await createUserWithEmailAndPassword(
@@ -67,6 +70,9 @@ function AuthForm() {
           email,
           password
         );
+        await updateProfile(auth.currentUser, {
+          displayName: nickName,
+        });
         if (newUser) {
           setRegisterStatus(true);
         }
@@ -162,6 +168,11 @@ function AuthForm() {
                 type="email"
                 placeholder="Adres email"
                 required
+                onChange={(e) => {
+                  emailChangeHandler(e);
+                  setAuthError(false);
+                }}
+                onBlur={emailBlurHandler}
                 value={email}
               />
             </div>
@@ -174,7 +185,11 @@ function AuthForm() {
                 placeholder="Hasło"
                 required
                 minLength="6"
-                onChange={(e) => passwordChangeHandler(e.target.value)}
+                onChange={(e) => {
+                  passwordChangeHandler(e);
+                  setAuthError(false);
+                }}
+                onBlur={passwordBlurHandler}
                 value={password}
               />
             </div>

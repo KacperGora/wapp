@@ -10,6 +10,7 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
+import ChatSendMessage from "../ChatSendMessage/ChatSendMessage";
 
 function Chat() {
   const [messages, setMessages] = useState([]);
@@ -35,6 +36,9 @@ function Chat() {
       {messages.map((message) => (
         <li key={message.createdAt}>{message.text}</li>
       ))}
+      <section>
+        <ChatSendMessage/>
+      </section>
     </aside>
   );
 }

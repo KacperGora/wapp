@@ -1,13 +1,15 @@
-
-import './App.css';
-import LandingPage from './Pages/LandingPage/LandingPage';
-import Routers from './routes/Routers';
-
+import "./App.css";
+import LandingPage from "./Pages/LandingPage/LandingPage";
+import Routers from "./routes/Routers";
+import { Provider } from "react-redux";
+import store from "./store/store";
 function App() {
   return (
-    <div className="app">
-     <Routers />
-    </div>
+    <Provider store={store}>
+      <div className="app">
+        <Routers />
+      </div>
+    </Provider>
   );
 }
 

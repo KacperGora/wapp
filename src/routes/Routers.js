@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "../Pages/LandingPage/LandingPage";
 import MainPage from "../Pages/MainPage/MainPage";
+import ProfilePage from "../Pages/ProfilePage/ProfilePage";
 // import MainPage from "../Pages/MainPage/MainPage";
 
 function Routers() {
@@ -9,6 +10,7 @@ function Routers() {
     <div>
       <Routes>
         <Route element={<MainPage />} path="/main" />
+        <Route element={<ProfilePage />} path="/profile" />
         <Route element={<LandingPage />} path="/" />
       </Routes>
     </div>

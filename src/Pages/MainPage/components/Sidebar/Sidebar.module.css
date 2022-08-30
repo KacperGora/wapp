@@ -2,27 +2,34 @@
   flex: 2;
   border-right: 1px solid rgba(128, 128, 128, 0.37);
 }
+
 .heading {
   padding: 1.2rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   border-bottom: 1px solid rgba(128, 128, 128, 0.37);
+
 }
-.imgBox {
+.imgBox img {
   clip-path: circle();
-  width: 5rem;
+  margin: 1.2rem;
   padding: 0;
   cursor: pointer;
+  width: 20%;
 }
 
 .iconsBox {
   display: flex;
   gap: 20px;
+  padding-right: 2.4rem;
 }
 .icon {
   font-size: 2.4rem;
   color: #008569;
   cursor: pointer;
+}
+.chatTools {
+  max-height: 15rem;
+  min-height: 15rem;
 }

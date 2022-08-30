@@ -1,10 +1,14 @@
 .loginContainer {
-  max-width: 140rem;
+  max-width: 60vw;
+  min-height: 90vh;
   margin: 0 auto;
   background-color: #eae5e1;
-  min-height: 90vh;
+
   padding: 0 3.2rem;
   display: flex;
   border-radius: 8px;
   box-shadow: -4px 4px 10px -4px rgba(156, 156, 156, 1);
+}
+.chatContainer {
+  flex: 6;
 }

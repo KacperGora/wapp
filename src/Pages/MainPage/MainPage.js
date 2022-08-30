@@ -7,9 +7,9 @@ import classes from "./MainPage.module.css";
 function MainPage() {
   return (
     <div className={classes.MainPageContainer}>
-      <Navbar />
+      {/* <Navbar /> */}
       <MainContent />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

@@ -8,7 +8,7 @@ input:focus {
   outline: none;
 }
 .icon {
-  font-size: 2.4rem;
+  font-size: 1.6rem;
   color: #858585;
   padding-right: 1.2rem;
   z-index: 2;
@@ -26,7 +26,4 @@ input:focus {
   display: flex;
   align-items: center;
 }
-.icon {
-  font-size: 2.4rem;
-  color: #858585;
-}
+  

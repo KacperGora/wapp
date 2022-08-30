@@ -12,24 +12,29 @@ import Search from "../Search/Search";
 function Sidebar() {
   return (
     <aside className={classes.container}>
-      <header className={classes.heading}>
-        <div className={classes.imgBox}>
-          <img src={noImg} alt="User avatar" />
-        </div>
-        <div className={classes.iconsBox}>
-          <div className={classes.icon}>
-            <HiOutlineStatusOnline />
+      <div className={classes.chatTools}>
+        <header className={classes.heading}>
+          <div className={classes.imgBox}>
+            <img src={noImg} alt="User avatar" />
           </div>
-          <div className={classes.icon}>
-            <HiOutlineChat />
+          <div className={classes.iconsBox}>
+            <div className={classes.icon}>
+              <HiOutlineStatusOnline />
+            </div>
+            <div className={classes.icon}>
+              <HiOutlineChat />
+            </div>
+            <div className={classes.icon}>
+              <HiOutlineDotsVertical />
+            </div>
           </div>
-          <div className={classes.icon}>
-            <HiOutlineDotsVertical />
-          </div>
-        </div>
-      </header>
-      <Search />
+        </header>
+        <Search />
+      </div>
+      <div className={classes.chatList}>
+
       <ListChat />
+      </div>
     </aside>
   );
 }

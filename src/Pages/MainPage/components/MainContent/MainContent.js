@@ -6,7 +6,9 @@ function MainContent() {
   return (
     <div className={classes.loginContainer}>
       <Sidebar />
-      <Chat />
+      <div className={classes.chatContainer}>
+        <Chat />
+      </div>
     </div>
   );
 }

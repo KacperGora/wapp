@@ -1,0 +1,11 @@
+.profilePageContainer {
+  max-width: 60vw;
+  min-height: 90vh;
+  margin: 4.8em auto;
+  background-color: #eae5e1;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  box-shadow: -4px 4px 10px -4px rgba(156, 156, 156, 1);
+}

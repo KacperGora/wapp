@@ -4,12 +4,12 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import firebase from 'firebase/app'
 const firebaseConfig = {
-  apiKey: "AIzaSyDzCn_DULUEH5WqDV9ooXPuxMLVqariGm4",
-  authDomain: "whatsapp-react-f1a98.firebaseapp.com",
-  projectId: "whatsapp-react-f1a98",
-  storageBucket: "whatsapp-react-f1a98.appspot.com",
-  messagingSenderId: "410074536217",
-  appId: "1:410074536217:web:b326b1dffa0466219d8d88",
+  apiKey: "AIzaSyCMtahzRr-w8ksOVvg2u80bTX6Odt2-CSo",
+  authDomain: "test-4e075.firebaseapp.com",
+  projectId: "test-4e075",
+  storageBucket: "test-4e075.appspot.com",
+  messagingSenderId: "1027677395749",
+  appId: "1:1027677395749:web:34dc86317463808e7cd8cc",
 };
 
 // Initialize Firebase
@@ -17,4 +17,5 @@ export const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
 export const auth = getAuth();
+
 

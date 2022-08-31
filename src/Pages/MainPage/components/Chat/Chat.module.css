@@ -1,0 +1,15 @@
+.container{
+    overflow-y: scroll;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+section{
+  
+}
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

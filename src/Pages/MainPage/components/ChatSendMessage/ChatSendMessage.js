@@ -3,10 +3,11 @@ import classes from "./ChatSendMessage.module.css";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { useSelector } from "react-redux";
-function ChatSendMessage() {
+import uuid from "react-uuid";
+function ChatSendMessage({ ref }) {
   const [newMessage, setNewMessage] = useState("");
   const user = useSelector((state) => state.auth.user);
-console.log(user)
+
   useEffect(() => {}, []);
 
   const messageSendHandler = async (e) => {
@@ -18,11 +19,12 @@ console.log(user)
           createdAt: serverTimestamp(),
           uid: user.uid,
           displayName: user.displayName,
-          photoUrl: user.photoUrl,
+          photoUrl: "",
+          id: uuid(),
         });
       }
     }
-
+    
     setNewMessage("");
   };
   return (

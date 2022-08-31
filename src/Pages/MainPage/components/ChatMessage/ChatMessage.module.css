@@ -1,0 +1,30 @@
+.singleMsg {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.288);
+  padding: 1.6rem;
+  margin: 1rem;
+}
+
+.sent {
+  color: black;
+  display: flex;
+ align-items: flex-end;
+ flex-direction: column;
+}
+.received {
+  color: red;
+}
+.userImg {
+  width: 5%;
+  clip-path: circle();
+  padding: 0;
+}
+.timeBox {
+  font-size: 1rem;
+  color: #777;
+}
+.msgDetail {
+  display: flex;
+  gap: 12px;
+}

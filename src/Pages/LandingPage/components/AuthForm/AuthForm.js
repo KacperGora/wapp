@@ -61,6 +61,7 @@ function AuthForm() {
       if (!register) {
         const logUser = await signInWithEmailAndPassword(auth, email, password);
         if (logUser) {
+          setIsLoading(false);
           navigate("/main");
           dispatch(authActions.setUser(logUser.user));
         }
@@ -74,11 +75,17 @@ function AuthForm() {
           displayName: nickName,
         });
         if (newUser) {
-          setRegisterStatus(true);
+          setRegisterStatus(false);
+          setIsLoading(false);
+          
         }
       }
     } catch (error) {
       const { code, message } = error;
+      if(error){
+        setIsLoading(false)
+      }
+      console.log(code, message)
       switch (message) {
         case "Firebase: Error (auth/user-not-found).":
           setAuthError("Nieznaleziono użytkownika, sprawdź dane.");

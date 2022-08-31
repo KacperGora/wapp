@@ -1,0 +1,33 @@
+.container {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.306);
+  min-height: 5vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.image {
+  width: 10rem;
+  height: 10rem;
+  padding: 2.4rem;
+  border-radius: 50%;
+}
+.userDetail {
+  display: flex;
+  align-items: center;
+}
+.lastLoginTime {
+  text-decoration: underline;
+  line-height: 2rem;
+}
+.actions {
+  cursor: pointer;
+  transition: 300ms all;
+  padding-right: 2.4rem;
+  display: flex;
+  gap: 1.6rem;
+  font-size: 1.2rem
+}
+.actions:hover {
+  color: #00614c;
+}

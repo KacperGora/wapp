@@ -1,0 +1,25 @@
+.sidebarContainer {
+  max-width: 15%;
+  height: 90vh;
+  border-right: 1px solid rgba(128, 128, 128, 0.311);
+}
+.navContnet {
+  list-style-type: none;
+  padding: 2.4rem;
+  line-height: 2rem;
+  font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: rgba(59, 59, 59);
+}
+.navContnet li {
+  color: rgba(59, 59, 59);
+  transition: ease-in 300ms;
+  cursor: pointer;
+}
+.navContnet li:hover {
+  color: #00614c;
+}

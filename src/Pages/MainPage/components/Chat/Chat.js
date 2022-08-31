@@ -4,22 +4,23 @@ import classes from "./Chat.module.css";
 import { db } from "../../../../firebase";
 import {
   collection,
-  doc,
   limit,
   onSnapshot,
   orderBy,
   query,
 } from "firebase/firestore";
 import ChatSendMessage from "../ChatSendMessage/ChatSendMessage";
+import ChatMessage from "../ChatMessage/ChatMessage";
 
 function Chat() {
   const [messages, setMessages] = useState([]);
+
   useEffect(() => {
     if (db) {
       const q = query(
         collection(db, "messages"),
         orderBy("createdAt"),
-        limit(25)
+        
       );
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const msg = [];
@@ -30,14 +31,15 @@ function Chat() {
       });
     }
   }, []);
-  console.log(messages);
+
   return (
-    <aside className={classes.container}>
-      {messages.map((message) => (
-        <li key={message.createdAt}>{message.text}</li>
-      ))}
+    <aside className={classes.box}>
+      <div className={classes.container}>
+        {messages &&
+          messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+      </div>
       <section>
-        <ChatSendMessage/>
+        <ChatSendMessage />
       </section>
     </aside>
   );

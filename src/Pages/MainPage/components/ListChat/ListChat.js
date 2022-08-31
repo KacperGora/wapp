@@ -1,139 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./ListChat.module.css";
-import noImg from "../../../../Assets/images/no-user-image.gif";
+
+import { db } from "../../../../firebase";
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { orderBy } from "lodash";
+import SidebarChatRoom from "../SidebarChatRoom/SidebarChatRoom";
+
 function ListChat() {
+  const [rooms, setRooms] = useState([]);
+  useEffect(() => {
+    if (db) {
+      const q = query(collection(db, "rooms"));
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        setRooms(
+          querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        );
+        return unsubscribe();
+      });
+    }
+  }, []);
+  console.log(rooms);
   return (
     <ul className={classes.allChatItems}>
-      <li onClick={(e)=>{console.log(e)}} className={classes.singleItem}>
-        <div className={classes.imgBox}>
-          <img src={noImg} alt="User avatar" />
-        </div>
-        <div className={classes.msgDetails}>
-          <div className={classes.msgAuthor}>Name</div>
-          <div className={classes.messageText}>lorem ipsum bla bla bla</div>
-        </div>
-        <div className={classes.textTime}>Time</div>
-      </li>
-      <li className={classes.singleItem}>
-        <div className={classes.imgBox}>
-          <img src={noImg} alt="User avatar" />
-        </div>
-        <div className={classes.msgDetails}>
-          <div className={classes.msgAuthor}>Name</div>
-          <div className={classes.messageText}>lorem ipsum bla bla bla</div>
-        </div>
-        <div className={classes.textTime}>Time</div>
-      </li>
-      <li className={classes.singleItem}>
-        <div className={classes.imgBox}>
-          <img src={noImg} alt="User avatar" />
-        </div>
-        <div className={classes.msgDetails}>
-          <div className={classes.msgAuthor}>Name</div>
-          <div className={classes.messageText}>lorem ipsum bla bla bla</div>
-        </div>
-        <div className={classes.textTime}>Time</div>
-      </li>
-      <li className={classes.singleItem}>
-        <div className={classes.imgBox}>
-          <img src={noImg} alt="User avatar" />
-        </div>
-        <div className={classes.msgDetails}>
-          <div className={classes.msgAuthor}>Name</div>
-          <div className={classes.messageText}>lorem ipsum bla bla bla</div>
-        </div>
-        <div className={classes.textTime}>Time</div>
-      </li>
-      <li className={classes.singleItem}>
-        <div className={classes.imgBox}>
-          <img src={noImg} alt="User avatar" />
-        </div>
-        <div className={classes.msgDetails}>
-          <div className={classes.msgAuthor}>Name</div>
-          <div className={classes.messageText}>lorem ipsum bla bla bla</div>
-        </div>
-        <div className={classes.textTime}>Time</div>
-      </li>
-      <li className={classes.singleItem}>
-        <div className={classes.imgBox}>
-          <img src={noImg} alt="User avatar" />
-        </div>
-        <div className={classes.msgDetails}>
-          <div className={classes.msgAuthor}>Name</div>
-          <div className={classes.messageText}>lorem ipsum bla bla bla</div>
-        </div>
-        <div className={classes.textTime}>Time</div>
-      </li>
-      <li className={classes.singleItem}>
-        <div className={classes.imgBox}>
-          <img src={noImg} alt="User avatar" />
-        </div>
-        <div className={classes.msgDetails}>
-          <div className={classes.msgAuthor}>Name</div>
-          <div className={classes.messageText}>lorem ipsum bla bla bla</div>
-        </div>
-        <div className={classes.textTime}>Time</div>
-      </li>
-      <li className={classes.singleItem}>
-        <div className={classes.imgBox}>
-          <img src={noImg} alt="User avatar" />
-        </div>
-        <div className={classes.msgDetails}>
-          <div className={classes.msgAuthor}>Name</div>
-          <div className={classes.messageText}>lorem ipsum bla bla bla</div>
-        </div>
-        <div className={classes.textTime}>Time</div>
-      </li>
-      <li className={classes.singleItem}>
-        <div className={classes.imgBox}>
-          <img src={noImg} alt="User avatar" />
-        </div>
-        <div className={classes.msgDetails}>
-          <div className={classes.msgAuthor}>Name</div>
-          <div className={classes.messageText}>lorem ipsum bla bla bla</div>
-        </div>
-        <div className={classes.textTime}>Time</div>
-      </li>
-      <li className={classes.singleItem}>
-        <div className={classes.imgBox}>
-          <img src={noImg} alt="User avatar" />
-        </div>
-        <div className={classes.msgDetails}>
-          <div className={classes.msgAuthor}>Name</div>
-          <div className={classes.messageText}>lorem ipsum bla bla bla</div>
-        </div>
-        <div className={classes.textTime}>Time</div>
-      </li>
-      <li className={classes.singleItem}>
-        <div className={classes.imgBox}>
-          <img src={noImg} alt="User avatar" />
-        </div>
-        <div className={classes.msgDetails}>
-          <div className={classes.msgAuthor}>Name</div>
-          <div className={classes.messageText}>lorem ipsum bla bla bla</div>
-        </div>
-        <div className={classes.textTime}>Time</div>
-      </li>
-      <li className={classes.singleItem}>
-        <div className={classes.imgBox}>
-          <img src={noImg} alt="User avatar" />
-        </div>
-        <div className={classes.msgDetails}>
-          <div className={classes.msgAuthor}>Name</div>
-          <div className={classes.messageText}>lorem ipsum bla bla bla</div>
-        </div>
-        <div className={classes.textTime}>Time</div>
-      </li>
-      <li className={classes.singleItem}>
-        <div className={classes.imgBox}>
-          <img src={noImg} alt="User avatar" />
-        </div>
-        <div className={classes.msgDetails}>
-          <div className={classes.msgAuthor}>Name</div>
-          <div className={classes.messageText}>lorem ipsum bla bla bla</div>
-        </div>
-        <div className={classes.textTime}>Time</div>
-      </li>
+      {rooms.map((room) => (
+        <SidebarChatRoom key={room.id} id={room.id} name={room.data.name} />
+      ))}
     </ul>
   );
 }

@@ -6,7 +6,7 @@ import { collection, onSnapshot, query } from "firebase/firestore";
 import { orderBy } from "lodash";
 import SidebarChatRoom from "../SidebarChatRoom/SidebarChatRoom";
 
-function ListChat() {
+function ListChat({ onSearch }) {
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
     if (db) {
@@ -22,12 +22,24 @@ function ListChat() {
       });
     }
   }, []);
-  console.log(rooms);
+
   return (
     <ul className={classes.allChatItems}>
-      {rooms.map((room) => (
-        <SidebarChatRoom key={room.id} id={room.id} name={room.data.name} />
-      ))}
+      {onSearch
+        ? rooms
+            .filter((room) =>
+              room.data.name.toLowerCase().includes(onSearch.toLowerCase())
+            )
+            .map((room) => (
+              <SidebarChatRoom
+                key={room.id}
+                id={room.id}
+                name={room.data.name}
+              />
+            ))
+        : rooms.map((room) => (
+            <SidebarChatRoom key={room.id} id={room.id} name={room.data.name} />
+          ))}
     </ul>
   );
 }

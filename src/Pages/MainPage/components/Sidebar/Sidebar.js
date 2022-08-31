@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./Sidebar.module.css";
 import noImg from "../../../../Assets/images/no-user-image.gif";
 import {
@@ -10,6 +10,8 @@ import ListChat from "../ListChat/ListChat";
 import Search from "../Search/Search";
 import { useNavigate } from "react-router-dom";
 function Sidebar() {
+  const [searchValue, setSearchValue] = useState();
+  console.log(searchValue);
   const navigate = useNavigate();
   return (
     <aside className={classes.container}>
@@ -35,10 +37,10 @@ function Sidebar() {
             </div>
           </div>
         </header>
-        <Search />
+        <Search onSearch={setSearchValue} />
       </div>
       <div className={classes.chatList}>
-        <ListChat />
+        <ListChat onSearch={searchValue} />
       </div>
     </aside>
   );

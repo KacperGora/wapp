@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import classes from "./Search.module.css";
 import { HiOutlineSearch } from "react-icons/hi";
 import { CgSortAz } from "react-icons/cg";
-function Search() {
-  const [searchInputValue, setSearchInputValue] = useState("");
+function Search({onSearch}) {
+
  const searchHandler = e => {
   
  }
@@ -11,7 +11,7 @@ function Search() {
     <div className={classes.searchContainer}>
       <div className={classes.searchBox}>
         <input
-          onChange={(e) => setSearchInputValue(e.target.value)}
+          onChange={(e) => onSearch(e.target.value)}
           type="search"
           placeholder="Szukaj lub rozpocznij nowy czat"
         />

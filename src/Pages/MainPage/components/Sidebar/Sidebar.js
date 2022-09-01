@@ -9,10 +9,14 @@ import {
 import ListChat from "../ListChat/ListChat";
 import Search from "../Search/Search";
 import { useNavigate } from "react-router-dom";
+import AddNewRoom from "../AddNewRoom/AddNewRoom";
 function Sidebar() {
   const [searchValue, setSearchValue] = useState();
-  console.log(searchValue);
+  const [addNewRoom, setAddNewRoom] = useState(false);
+  const [isTouchedSearchInput, setIsTouchedIsTouchedSearchedInput] =
+    useState(false);
   const navigate = useNavigate();
+
   return (
     <aside className={classes.container}>
       <div className={classes.chatTools}>
@@ -26,21 +30,32 @@ function Sidebar() {
             <img src={noImg} alt="User avatar" />
           </div>
           <div className={classes.iconsBox}>
-            <div className={classes.icon}>
+            <div title="Zmień status" className={classes.icon}>
               <HiOutlineStatusOnline />
             </div>
-            <div className={classes.icon}>
-              <HiOutlineChat />
+            <div
+              onClick={() => setAddNewRoom(!addNewRoom)}
+              className={classes.icon}
+            >
+              <HiOutlineChat title="Dodaj nowy czat" />
             </div>
             <div className={classes.icon}>
-              <HiOutlineDotsVertical />
+              <HiOutlineDotsVertical title="Więcej.." />
             </div>
           </div>
         </header>
-        <Search onSearch={setSearchValue} />
+
+        {addNewRoom ? (
+          <AddNewRoom />
+        ) : (
+          <Search
+            onTouch={setIsTouchedIsTouchedSearchedInput}
+            onSearch={setSearchValue}
+          />
+        )}
       </div>
       <div className={classes.chatList}>
-        <ListChat onSearch={searchValue} />
+        <ListChat isTouched={isTouchedSearchInput} onSearch={searchValue} />
       </div>
     </aside>
   );

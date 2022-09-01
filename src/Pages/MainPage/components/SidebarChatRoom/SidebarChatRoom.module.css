@@ -7,11 +7,12 @@
   margin: 1.2rem;
   padding-right: 1.6rem;
   min-height: 8rem;
-  box-shadow:  1px 2px 3px rgba(116, 116, 116, 0.3);
-  cursor:pointer;
-
+  box-shadow: 1px 2px 3px rgba(116, 116, 116, 0.3);
+  cursor: pointer;
 }
-
+.singleItem:hover {
+  background-color: #c7c1bb;
+}
 .imgBox img {
   clip-path: circle();
   margin: 1.2rem;
@@ -39,4 +40,8 @@
   color: rgba(39, 39, 39, 0.836);
   align-self: flex-end;
   padding-bottom: 2.4rem;
+}
+.link {
+  color: #333;
+  text-decoration: none;
 }

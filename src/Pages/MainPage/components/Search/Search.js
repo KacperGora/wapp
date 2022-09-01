@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./Search.module.css";
 import { HiOutlineSearch } from "react-icons/hi";
-import { CgSortAz } from "react-icons/cg";
-function Search({onSearch}) {
 
- const searchHandler = e => {
-  
- }
+function Search({ onSearch, onTouch }) {
+  const searchHandler = (e) => {};
   return (
     <div className={classes.searchContainer}>
       <div className={classes.searchBox}>
         <input
+          onFocus={() => onTouch(true)}
           onChange={(e) => onSearch(e.target.value)}
           type="search"
           placeholder="Szukaj lub rozpocznij nowy czat"
@@ -19,9 +17,6 @@ function Search({onSearch}) {
           <HiOutlineSearch />
         </span>
       </div>
-      <span className={classes.icon}>
-        <CgSortAz />
-      </span>
     </div>
   );
 }

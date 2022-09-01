@@ -4,7 +4,7 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { useSelector } from "react-redux";
 import uuid from "react-uuid";
-function ChatSendMessage({ ref }) {
+function ChatSendMessage({ id }) {
   const [newMessage, setNewMessage] = useState("");
   const user = useSelector((state) => state.auth.user);
 
@@ -14,7 +14,7 @@ function ChatSendMessage({ ref }) {
     e.preventDefault();
     if (db) {
       if (newMessage.trim() !== "") {
-        const msgRef = await addDoc(collection(db, "messages"), {
+        const msgRef = await addDoc(collection(db, `rooms/${id}/messages`), {
           text: newMessage,
           createdAt: serverTimestamp(),
           uid: user.uid,
@@ -24,7 +24,7 @@ function ChatSendMessage({ ref }) {
         });
       }
     }
-    
+
     setNewMessage("");
   };
   return (

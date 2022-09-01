@@ -234,6 +234,8 @@ function AuthForm() {
               disabled={!formIsValid}
               className={classes.lgnBtn}
               onClick={formSubmitHandler}
+              title={!formIsValid ? 'Uzupełnij dane' : 'Wyślij'}
+              
             >
               {!register ? "Zaloguj" : "Zarejestruj"}
             </button>

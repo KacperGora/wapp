@@ -1,6 +1,6 @@
 .loginContainer {
   max-width: 60vw;
-  min-height: 90vh;
+  max-height: 80vh;
   margin: 0 auto;
   background-color: #eae5e1;
 
@@ -11,4 +11,8 @@
 }
 .chatContainer {
   flex: 6;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

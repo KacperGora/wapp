@@ -1,0 +1,31 @@
+input {
+  width: 90%;
+  border: none;
+  background-color: #d0cbc8;
+  border-radius: 8px;
+}
+input:focus {
+  outline: none;
+}
+.icon {
+  font-size: 2.6rem;
+  color: #858585;
+  padding-right: 1.2rem;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.searchBox {
+  margin:2.4rem 1.2rem;
+  display: flex;
+  align-items: center;
+  background-color: #d0cbc8;
+  border-radius: 8px;
+  width: 90%;
+}
+
+
+.button {
+  border: none;
+  background-color: #d0cbc8;
+}

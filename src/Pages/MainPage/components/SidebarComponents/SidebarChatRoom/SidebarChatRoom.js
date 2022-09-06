@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./SidebarChatRoom.module.css";
-import noImg from "../../../../Assets/images/no-user-image.gif";
+import noImg from "../../../../../Assets/images/no-user-image.gif";
 import { Link } from "react-router-dom";
 
 function SidebarChatRoom({ id, name, messages }) {

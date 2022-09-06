@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 
-import Search from "../Search/Search";
+import Search from "../../Helpers/Search/Search";
 import classes from "./MainChatHeader.module.css";
 function MainChatHeader({ roomName, lastMsg, onSearch }) {
   const [toSearch, setToSearch] = useState(false);

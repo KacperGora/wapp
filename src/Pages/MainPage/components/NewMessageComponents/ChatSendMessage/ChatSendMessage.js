@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./ChatSendMessage.module.css";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../../../../firebase";
+import { db } from "../../../../../firebase";
 import { useSelector } from "react-redux";
 import uuid from "react-uuid";
 function ChatSendMessage({ id }) {

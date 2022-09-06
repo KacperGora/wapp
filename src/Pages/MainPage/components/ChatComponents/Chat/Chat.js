@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import classes from "./Chat.module.css";
-import { db } from "../../../../firebase";
+import { db } from "../../../../../firebase";
 import {
   collection,
   doc,
@@ -9,11 +9,11 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
-
 import ChatMessage from "../ChatMessage/ChatMessage";
-import MainChatHeader from "../MainChatHeader/MainChatHeader";
+import MainChatHeader from '../MainChatHeader/MainChatHeader'
 
-function Chat({ rooms }) {
+
+function Chat() {
   const { id } = useParams();
   const [roomName, setRoomName] = useState("");
   const [messages, setMessages] = useState([]);

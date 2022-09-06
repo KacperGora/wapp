@@ -9,9 +9,11 @@ function Routers() {
   return (
     <div>
       <Routes>
-        <Route element={<ProfilePage />} path="/profile" />
+        <Route element={<ProfilePage />} path="profile" >
+          <Route element={<ProfilePage/>} path=":userId"/>
+          </Route>
 
-        <Route element={<MainPage />} path="/main">
+        <Route element={<MainPage />} path="main">
           <Route element={<MainPage />} path=":id" />
         </Route>
 

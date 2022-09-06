@@ -1,7 +1,6 @@
 import React from "react";
-import { auth } from "../../../../firebase";
+import {auth} from '../../../../../firebase'
 import classes from "./ChatMessage.module.css";
-import img from "../../../../Assets/images/no-user-image.gif";
 function ChatMessage(props) {
   const { text, uid, photoUrl, displayName, createdAt } = props.message;
 console.log();

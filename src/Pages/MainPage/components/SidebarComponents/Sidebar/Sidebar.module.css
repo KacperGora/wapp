@@ -1,0 +1,11 @@
+.container {
+  flex: 2;
+  border-right: 1px solid rgba(128, 128, 128, 0.37);
+}
+
+
+
+.chatTools {
+  max-height: 15rem;
+  min-height: 15rem;
+}

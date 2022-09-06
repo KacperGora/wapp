@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./ListChat.module.css";
 import SidebarChatRoom from "../SidebarChatRoom/SidebarChatRoom";
-import AddNewRoom from "../AddNewRoom/AddNewRoom";
+import AddNewRoom from "../../NewMessageComponents/AddNewRoom/AddNewRoom";
 
 function ListChat({ onSearch, id, rooms }) {
   const filteredRooms = rooms

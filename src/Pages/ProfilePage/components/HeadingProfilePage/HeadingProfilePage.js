@@ -5,15 +5,14 @@ import img from "../../../../Assets/images/no-user-image.gif";
 import { useSelector } from "react-redux";
 
 import { HiArrowNarrowLeft } from "react-icons/hi";
-import setDefaultOptions from "date-fns/setDefaultOptions";
-import { pl } from "date-fns/locale";
+
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../../firebase";
 function HeadingProfilePage() {
-  setDefaultOptions({ locale: pl });
+
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
-  console.log(auth.currentUser);
+
   return (
     <header className={classes.container}>
       <div className={classes.userDetail}>

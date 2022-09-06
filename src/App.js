@@ -10,7 +10,7 @@ function App() {
     <Provider store={store}>
       <HashRouter>
         <Routers>
-          <div className="app"></div>
+          <div className="app"/>
         </Routers>
       </HashRouter>
     </Provider>

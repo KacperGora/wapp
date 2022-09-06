@@ -16,7 +16,7 @@ input:focus {
 }
 
 .searchBox {
-  margin: 2.4rem 1.2rem;
+  margin: 1.2rem;
   display: flex;
   align-items: center;
   background-color: #d0cbc8;

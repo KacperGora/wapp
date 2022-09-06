@@ -1,17 +1,36 @@
-import React from "react";
-import {
-  HiOutlineChat,
-  HiOutlineDotsVertical,
-  HiOutlineStatusOnline,
-} from "react-icons/hi";
+import React, { useState } from "react";
+import { HiOutlineSearch } from "react-icons/hi";
+
+import Search from "../Search/Search";
 import classes from "./MainChatHeader.module.css";
-function MainChatHeader({ roomName }) {
+function MainChatHeader({ roomName, lastMsg, onSearch }) {
+  const [toSearch, setToSearch] = useState(false);
+
   return (
     <div className={classes.container}>
-      <div className={classes.chatDetails}>
-        <h3>{roomName}</h3>
-        <p>Widziano ostatnio: </p>
-      </div>
+      {toSearch ? (
+        <Search
+          setToSearch={setToSearch}
+          toSearch={toSearch}
+          onSearch={onSearch}
+          placeholder={"Wyszukaj wiadomości"}
+        />
+      ) : (
+        <div className={classes.chatDetails}>
+          <div>
+            <h3>{roomName}</h3>
+            <p>
+              Widziano ostatnio: {lastMsg?.createdAt?.toDate().toLocaleString()}
+            </p>
+          </div>
+
+          <HiOutlineSearch
+            onClick={() => setToSearch(true)}
+            title="Szukaj w wiadomościach"
+            className={classes.icon}
+          />
+        </div>
+      )}
     </div>
   );
 }

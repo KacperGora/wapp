@@ -10,11 +10,11 @@ import ListChat from "../ListChat/ListChat";
 import Search from "../Search/Search";
 import { useNavigate } from "react-router-dom";
 import AddNewRoom from "../AddNewRoom/AddNewRoom";
-function Sidebar() {
-  const [searchValue, setSearchValue] = useState();
+import { auth } from "../../../../firebase";
+function Sidebar({ id, rooms }) {
+  const [searchValue, setSearchValue] = useState('');
   const [addNewRoom, setAddNewRoom] = useState(false);
-  const [isTouchedSearchInput, setIsTouchedIsTouchedSearchedInput] =
-    useState(false);
+  
   const navigate = useNavigate();
 
   return (
@@ -27,7 +27,7 @@ function Sidebar() {
             }}
             className={classes.imgBox}
           >
-            <img src={noImg} alt="User avatar" />
+            <img src={auth.currentUser?.photoURL || noImg} alt="User avatar" />
           </div>
           <div className={classes.iconsBox}>
             <div title="Zmień status" className={classes.icon}>
@@ -49,13 +49,19 @@ function Sidebar() {
           <AddNewRoom />
         ) : (
           <Search
-            onTouch={setIsTouchedIsTouchedSearchedInput}
+           
             onSearch={setSearchValue}
+            placeholder = {'Szukaj konwersacji lub załóż nową.'}
           />
         )}
       </div>
       <div className={classes.chatList}>
-        <ListChat isTouched={isTouchedSearchInput} onSearch={searchValue} />
+        <ListChat
+          id={id}
+       
+          onSearch={searchValue}
+          rooms={rooms}
+        />
       </div>
     </aside>
   );

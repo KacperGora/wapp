@@ -8,14 +8,20 @@ import { HiArrowNarrowLeft } from "react-icons/hi";
 import setDefaultOptions from "date-fns/setDefaultOptions";
 import { pl } from "date-fns/locale";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../../../firebase";
 function HeadingProfilePage() {
   setDefaultOptions({ locale: pl });
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
+  console.log(auth.currentUser);
   return (
     <header className={classes.container}>
       <div className={classes.userDetail}>
-        <img className={classes.image} src={img} alt="user avatar" />
+        <img
+          className={classes.image}
+          src={auth.currentUser.photoURL || img}
+          alt="user avatar"
+        />
         <div>
           <h2>{user.displayName}</h2>
           <p className={classes.lastLoginTime}>{`Ostatnie logowanie: ${new Date(

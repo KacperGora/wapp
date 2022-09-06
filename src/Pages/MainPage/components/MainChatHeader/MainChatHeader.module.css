@@ -1,9 +1,20 @@
 .container {
-  flex: 2;
+ 
   border-bottom: 1px solid rgba(128, 128, 128, 0.37);
   margin: 3.2rem;
   padding: 1rem 0;
+
 }
 .chatDetails h3 {
   font-size: 1.6rem;
+
+}
+.chatDetails {
+    display: flex;
+    justify-content: space-between;
+}
+.icon{
+  font-size: 1.6rem;
+  align-items: flex-end;
+  cursor: pointer;
 }

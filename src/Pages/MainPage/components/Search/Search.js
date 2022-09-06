@@ -1,20 +1,28 @@
 import React from "react";
 import classes from "./Search.module.css";
 import { HiOutlineSearch } from "react-icons/hi";
-
-function Search({ onSearch, onTouch }) {
-  const searchHandler = (e) => {};
+import { MdOutlineCancel } from "react-icons/md";
+function Search({ onSearch, placeholder, toSearch, setToSearch }) {
   return (
     <div className={classes.searchContainer}>
       <div className={classes.searchBox}>
         <input
-          onFocus={() => onTouch(true)}
+          // onFocus={() => onTouch(true)}
           onChange={(e) => onSearch(e.target.value)}
           type="search"
-          placeholder="Szukaj lub rozpocznij nowy czat"
+          placeholder={placeholder}
         />
-        <span onClick={searchHandler} className={classes.icon}>
-          <HiOutlineSearch />
+        <span className={classes.icon}>
+          {!toSearch ? (
+            <HiOutlineSearch />
+          ) : (
+            <MdOutlineCancel
+              onClick={() => {
+                setToSearch(false);
+                onSearch("");
+              }}
+            />
+          )}
         </span>
       </div>
     </div>

@@ -5,6 +5,7 @@ import {
   MdAlternateEmail,
   MdOutlineLock,
   MdPersonOutline,
+  MdOutlineImage,
 } from "react-icons/md";
 import {
   createUserWithEmailAndPassword,
@@ -12,12 +13,14 @@ import {
   updateProfile,
 } from "firebase/auth";
 
-import { auth } from "../../../../firebase";
+import { auth, storage } from "../../../../firebase";
 import Spinner from "../../../../components/UI/Spinner/Spinner";
 import { useNavigate } from "react-router-dom";
 import useIsValid from "../../../../hooks/useIsValid";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../../store/authSlice";
+
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 function AuthForm() {
   const [nickName, setNickName] = useState("");
   const [authError, setAuthError] = useState("");
@@ -25,8 +28,10 @@ function AuthForm() {
   const [register, setRegister] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formIsValid, setFormIsValid] = useState(false);
-
+  const [file, setFile] = useState(null);
+  const [progress, setProgress] = useState(0);
   const [registerStatus, setRegisterStatus] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -71,21 +76,23 @@ function AuthForm() {
           email,
           password
         );
-        await updateProfile(auth.currentUser, {
-          displayName: nickName,
-        });
+        file && uploadFiles(file);
+        imageUrl &&
+          (await updateProfile(auth.currentUser, {
+            displayName: nickName,
+            photoURL: imageUrl,
+          }));
         if (newUser) {
           setRegisterStatus(false);
           setIsLoading(false);
-          
         }
       }
     } catch (error) {
       const { code, message } = error;
-      if(error){
-        setIsLoading(false)
+      if (error) {
+        setIsLoading(false);
       }
-      console.log(code, message)
+      console.log(code, message);
       switch (message) {
         case "Firebase: Error (auth/user-not-found).":
           setAuthError("Nieznaleziono użytkownika, sprawdź dane.");
@@ -100,6 +107,24 @@ function AuthForm() {
       setIsLoading(false);
       throw new Error(message);
     }
+  };
+  const uploadFiles = (file) => {
+    if (!file) return;
+    const storageRef = ref(storage, `/avatars/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(progress);
+      },
+      (err) => console.log(err),
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => setImageUrl(url));
+      }
+    );
   };
   return (
     <>
@@ -214,6 +239,15 @@ function AuthForm() {
                 value={confirmPassword}
               />
             </div>
+            <div className={classes.inputContainer}>
+              <MdOutlineImage color="#008069" size="2.4rem" />
+              <input
+                type={"file"}
+                onChange={(e) => {
+                  setFile(e.target.files[0]);
+                }}
+              />
+            </div>
           </>
         )}
       </form>
@@ -234,8 +268,7 @@ function AuthForm() {
               disabled={!formIsValid}
               className={classes.lgnBtn}
               onClick={formSubmitHandler}
-              title={!formIsValid ? 'Uzupełnij dane' : 'Wyślij'}
-              
+              title={!formIsValid ? "Uzupełnij dane" : "Wyślij"}
             >
               {!register ? "Zaloguj" : "Zarejestruj"}
             </button>

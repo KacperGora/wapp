@@ -5,6 +5,7 @@ import MainContent from "./components/MainContent/MainContent";
 
 import classes from "./MainPage.module.css";
 function MainPage() {
+  
   return (
     <div className={classes.MainPageContainer}>
       {/* <Navbar /> */}

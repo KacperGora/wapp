@@ -8,7 +8,6 @@ function ChatSendMessage({ id }) {
   const [newMessage, setNewMessage] = useState("");
   const user = useSelector((state) => state.auth.user);
 
-  useEffect(() => {}, []);
 
   const messageSendHandler = async (e) => {
     e.preventDefault();

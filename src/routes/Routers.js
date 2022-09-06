@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import LandingPage from "../Pages/LandingPage/LandingPage";
 import MainPage from "../Pages/MainPage/MainPage";
 import ProfilePage from "../Pages/ProfilePage/ProfilePage";

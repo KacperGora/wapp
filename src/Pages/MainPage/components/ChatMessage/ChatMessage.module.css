@@ -5,15 +5,26 @@
   padding: 1.6rem;
   margin: 1rem;
 }
-
+.singleMsg .sent {
+  align-self: flex-end;
+}
 .sent {
-  color: black;
+  color: white;
   display: flex;
- align-items: flex-end;
- flex-direction: column;
+  align-items: flex-end;
+  flex-direction: column;
+  width: fit-content;
+  background-color: rgb(65, 34, 191);
+  border-radius: 12px;
+  padding: 1.2rem;
+  text-align: end;
 }
 .received {
-  color: red;
+  color: white;
+  width: fit-content;
+  background-color: red;
+  border-radius: 12px;
+  padding: 1.2rem;
 }
 .userImg {
   width: 5%;

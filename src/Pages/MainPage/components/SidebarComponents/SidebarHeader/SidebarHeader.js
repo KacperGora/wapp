@@ -10,7 +10,7 @@ import noImg from "../../../../../Assets/images/no-user-image.gif";
 import { auth } from "../../../../../firebase";
 function SidebarHeader({ setAddNewRoom, addNewRoom }) {
   const navigate = useNavigate();
-  const uid = auth.currentUser.uid;
+  const uid = auth?.currentUser?.uid;
   return (
     <header className={classes.heading}>
       <Link to={`/profile/${uid}`}>

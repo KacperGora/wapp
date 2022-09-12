@@ -1,76 +1,50 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import classes from "./Chat.module.css";
-import { db } from "../../../../../firebase";
-import {
-  collection,
-  doc,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
+import { auth, db } from "../../../../../firebase";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import ChatMessage from "../ChatMessage/ChatMessage";
-import MainChatHeader from '../MainChatHeader/MainChatHeader'
-
+import MainChatHeader from "../MainChatHeader/MainChatHeader";
 
 function Chat() {
   const { id } = useParams();
-  const [roomName, setRoomName] = useState("");
   const [messages, setMessages] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const scrollRef = useRef();
-  const filteredMessages = messages.filter((room) =>
-    room.text?.toLowerCase().includes(searchInput?.toLowerCase())
-  );
+  scrollRef.current?.scrollIntoView({ behavior: "smooth" });
 
   useEffect(() => {
-    if (id) {
-      const unsub = onSnapshot(doc(db, "rooms", id), (doc) => {
-        setRoomName(doc.data().name);
-      });
-      const q = query(
-        collection(db, `rooms/${id}`, "messages"),
-        orderBy("createdAt", "asc")
-      );
-      const unsub2 = onSnapshot(q, (querySnap) => {
-        setMessages(querySnap.docs.map((doc) => doc.data()));
-      });
+    const idMsg =
+      auth.currentUser.uid > id
+        ? `${auth.currentUser.uid + id}`
+        : `${id + auth.currentUser.uid}`;
 
-      return () => {
-        unsub();
-        unsub2();
-      };
-    }
+    const msgRef = collection(db, "messages", idMsg, "chat");
+    const q = query(msgRef, orderBy("createdAt", "asc"));
+    onSnapshot(q, (querySnapshot) => {
+      let msg = [];
+      querySnapshot.forEach((doc) => {
+        msg.push(doc.data());
+      });
+      setMessages(msg);
+    });
   }, [id]);
 
-  useEffect(() => {
-    const unsub = () =>
-      scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-    return () => {
-      unsub();
-    };
-  }, []);
+  //Filtered messages //
+  messages.filter((message) => message.text.includes(searchInput));
 
   return (
     <aside className={classes.box}>
       <MainChatHeader
         onSearch={setSearchInput}
-        roomName={roomName}
         lastMsg={messages[messages.length - 1]}
       />
       <div className={classes.container}>
-        {searchInput
-          ? filteredMessages.map((msg) => (
-              <div key={msg.id} className={classes.msgWrapper} ref={scrollRef}>
-                <ChatMessage key={msg.id} message={msg} />
-              </div>
-            ))
-          : messages &&
-            messages.map((msg) => (
-              <div key={msg.id} className={classes.msgWrapper} ref={scrollRef}>
-                <ChatMessage key={msg.id} message={msg} />
-              </div>
-            ))}
+        <div ref={scrollRef}>
+          {messages.map((message) => (
+            <ChatMessage key={message.id} message={message} />
+          ))}
+        </div>
       </div>
     </aside>
   );

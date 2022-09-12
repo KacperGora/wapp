@@ -1,4 +1,4 @@
-/* .MainPageContainer::before {
+.MainPageContainer::before {
   content: "";
   display: block;
   width: 100%;
@@ -7,7 +7,7 @@
   z-index: -1;
   position: absolute;
   top: 0;
-} */
+}
 .MainPageContainer {
   min-height: calc(100vh - 156px - 290px);
   margin: 2.4rem auto;

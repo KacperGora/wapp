@@ -1,20 +1,26 @@
 .container {
- 
-  border-bottom: 1px solid rgba(128, 128, 128, 0.37);
-  margin: 3.2rem;
-  padding: 1rem 0;
-
+  margin-bottom: 9.2rem;
 }
 .chatDetails h3 {
   font-size: 1.6rem;
-
 }
 .chatDetails {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  margin: 2.4rem 1.2rem;
+  justify-content: space-between;
 }
-.icon{
+.icon {
   font-size: 1.6rem;
   align-items: flex-end;
   cursor: pointer;
+}
+
+.searchbarContainer{
+  display: flex;
+  align-items: center;
+  position: relative;
+
+}
+.searchbarContainer input {
+width: 550px
 }

@@ -9,8 +9,8 @@ import { HiArrowNarrowLeft } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../../firebase";
 function HeadingProfilePage() {
-
   const user = useSelector((state) => state.auth.user);
+  console.log(user)
   const navigate = useNavigate();
 
   return (
@@ -18,7 +18,7 @@ function HeadingProfilePage() {
       <div className={classes.userDetail}>
         <img
           className={classes.image}
-          src={auth.currentUser.photoURL || img}
+          src={auth?.currentUser.photoURL || img}
           alt="user avatar"
         />
         <div>

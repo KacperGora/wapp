@@ -4,7 +4,7 @@ import classes from "./MainContent.module.css";
 import image from "../../../../Assets/images/2211.png";
 import LoginForm from "../AuthForm/AuthForm";
 import AuthForm from "../AuthForm/AuthForm";
-function MainContent() {
+function MainContent({ auth, setAuth }) {
   return (
     <main className={classes.loginContainer}>
       <div>
@@ -15,7 +15,7 @@ function MainContent() {
           </div>
           <p>zaloguj się przy użyciu konta lub stwórz nowe.</p>
         </section>
-        <AuthForm />
+        <AuthForm auth={auth} setAuth={setAuth} />
       </div>
       <div className={classes.imgContainer}>
         <img src={image} alt="Screens of app features" />

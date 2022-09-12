@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Sidebar.module.css";
 import AddNewRoom from "../../NewMessageComponents/AddNewRoom/AddNewRoom";
 import Search from "../../Helpers/Search/Search";
 import ListChat from "../ListChat/ListChat";
 import SidebarHeader from "../SidebarHeader/SidebarHeader";
-function Sidebar({ id, rooms }) {
+
+import { collection, onSnapshot, where, query } from "firebase/firestore";
+import { auth, db } from "../../../../../firebase";
+import SidebarChatRoom from "../SidebarChatRoom/SidebarChatRoom";
+function Sidebar({ users }) {
   const [searchValue, setSearchValue] = useState("");
   const [addNewRoom, setAddNewRoom] = useState(false);
 
@@ -23,7 +27,7 @@ function Sidebar({ id, rooms }) {
         )}
       </div>
       <div className={classes.chatList}>
-        <ListChat id={id} onSearch={searchValue} rooms={rooms} />
+    <ListChat users={users}/>
       </div>
     </aside>
   );

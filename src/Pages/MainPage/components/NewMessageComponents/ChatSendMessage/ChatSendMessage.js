@@ -1,40 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import classes from "./ChatSendMessage.module.css";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../../../../../firebase";
-import { useSelector } from "react-redux";
+import { auth, db } from "../../../../../firebase";
+
 import uuid from "react-uuid";
 function ChatSendMessage({ id }) {
   const [newMessage, setNewMessage] = useState("");
-  const user = useSelector((state) => state.auth.user);
+  const idMsg =
+    auth.currentUser.uid > id
+      ? `${auth.currentUser.uid + id}`
+      : `${id + auth.currentUser.uid}`;
 
-
+  console.log(idMsg);
   const messageSendHandler = async (e) => {
     e.preventDefault();
     if (db) {
       if (newMessage.trim() !== "") {
-        const msgRef = await addDoc(collection(db, `rooms/${id}/messages`), {
+        await addDoc(collection(db, "messages", idMsg, "chat"), {
           text: newMessage,
+          from: auth.currentUser.uid,
+          to: id,
           createdAt: serverTimestamp(),
-          uid: user.uid,
-          displayName: user.displayName,
-          photoUrl: "",
           id: uuid(),
         });
+        setNewMessage("");
       }
     }
 
     setNewMessage("");
   };
   return (
-    <form onSubmit={messageSendHandler}>
+    <form className={classes.newMessageForm} onSubmit={messageSendHandler}>
       <input
         type="text"
         value={newMessage}
         placeholder="Wpisz wiadomość"
         onChange={(e) => setNewMessage(e.target.value)}
       />
-      <button>Wyślij</button>
+      <button className={classes.sendBtn}>Wyślij</button>
     </form>
   );
 }

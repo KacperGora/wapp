@@ -50,12 +50,13 @@
   color: #333;
   text-decoration: none;
 }
-.dot {
+.online, .offline {
   width: 8px;
   height: 8px;
-  background-color: red;
+  background-color: green;
   clip-path: circle();
   align-self: flex-end;
-
-
+}
+.offline {
+  background-color: red;
 }

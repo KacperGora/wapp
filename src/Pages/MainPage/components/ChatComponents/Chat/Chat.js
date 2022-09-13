@@ -6,7 +6,7 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import ChatMessage from "../ChatMessage/ChatMessage";
 import MainChatHeader from "../MainChatHeader/MainChatHeader";
 
-function Chat() {
+function Chat({ selectedUser }) {
   const { id } = useParams();
   const [messages, setMessages] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -35,10 +35,13 @@ function Chat() {
 
   return (
     <aside className={classes.box}>
-      <MainChatHeader
-        onSearch={setSearchInput}
-        lastMsg={messages[messages.length - 1]}
-      />
+      <div className={classes.headerWrapper}>
+        <MainChatHeader
+          selectedUser={selectedUser}
+          onSearch={setSearchInput}
+          lastMsg={messages[messages.length - 1]}
+        />{" "}
+      </div>
       <div className={classes.container}>
         <div ref={scrollRef}>
           {messages.map((message) => (

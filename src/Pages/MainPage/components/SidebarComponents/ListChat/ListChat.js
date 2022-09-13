@@ -2,11 +2,13 @@ import React from "react";
 import classes from "./ListChat.module.css";
 import SidebarChatRoom from "../SidebarChatRoom/SidebarChatRoom";
 
-function ListChat({ users }) {
+function ListChat({ users, setSelectedUser }) {
   return (
     <ul className={classes.allChatItems}>
       {users.map((user) => (
-        <SidebarChatRoom key={user.uid} user={user} />
+        <div onClick={() => setSelectedUser(user.nickName)} key={user.uid}>
+          <SidebarChatRoom setSelectedUser={setSelectedUser} user={user} />
+        </div>
       ))}
     </ul>
   );

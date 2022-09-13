@@ -9,7 +9,7 @@
 .singleMsg .sent {
   align-self: flex-end;
 }
-.sent {
+.received {
   color: #333;
   display: flex;
   align-items: flex-end;
@@ -21,7 +21,11 @@
   text-align: end;
   box-shadow: 1px 1px 3px 1px   rgb(113, 113, 113);
 }
-.received {
+.received .timeBox {
+  font-size: 0.8  rem;
+  color: rgb(99, 99, 99);
+}
+.sent {
   color: white;
   width: fit-content;
   background-color: #3F612D;
@@ -35,8 +39,8 @@
   padding: 0;
 }
 .timeBox {
-  font-size: 1rem;
-  color: #555;
+  font-size: 0.8  rem;
+  color: rgb(208, 208, 208);
 }
 .msgDetail {
   display: flex;

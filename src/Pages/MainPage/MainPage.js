@@ -5,27 +5,52 @@ import MainContent from "./components/MainContent/MainContent";
 
 import classes from "./MainPage.module.css";
 import { auth, db } from "../../firebase";
+
 function MainPage() {
+  const [friends, setFriends] = useState([]);
   const [users, setUsers] = useState([]);
+  const [user, setUser] = useState([]);
+
   useEffect(() => {
+    let user = [];
     const q = query(
-      collection(db, "users"),
-      where("uid", "not-in", [auth.currentUser?.uid])
+      collection(db, `users`),
+      where("uid", "in", [auth.currentUser?.uid])
     );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const users = [];
       querySnapshot.forEach((doc) => {
-        users.push(doc.data());
+        user.push(doc.data());
       });
-      setUsers(users);
+      setUser(...user);
+      // setUsers(friends);
     });
     return () => unsubscribe();
   }, []);
-
+console.log(user)
+  useEffect(() => {
+    const usersFriends = [];
+    user?.friends?.forEach((friend) => {
+      const q = query(collection(db, `users`), where("email", "==", friend.toLowerCase()));
+      const unsub = onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          usersFriends.push(doc.data());
+          // if (friends) setFriends(doc.data());
+          // else {
+          //   setFriends((currState) => {
+          //     return [currState, doc.data()];
+          //   });
+          // }
+        });
+        console.log(usersFriends);
+        setFriends(usersFriends);
+      });
+    });
+  }, [user]);
+  console.log(friends);
   return (
     <div className={classes.MainPageContainer}>
       <Navbar />
-      <MainContent users={users} />
+      <MainContent users={friends} />
     </div>
   );
 }

@@ -11,7 +11,6 @@ function ChatSendMessage({ id }) {
       ? `${auth.currentUser.uid + id}`
       : `${id + auth.currentUser.uid}`;
 
-  console.log(idMsg);
   const messageSendHandler = async (e) => {
     e.preventDefault();
     if (db) {

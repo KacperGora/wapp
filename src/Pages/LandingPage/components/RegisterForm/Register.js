@@ -15,16 +15,17 @@ import { auth, db } from "../../../../firebase";
 import Spinner from "../../../../components/UI/Spinner/Spinner";
 
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 function Register({ setAuth }) {
   const [file, setFile] = useState();
   const [progress, imageUrl] = useUploadImage(file);
   const [formIsValid, setFormIsValid] = useState(false);
-  const [authStatus, setAuthStatus] = useState(null);
+  const [authStatus, setAuthStatus] = useState(false);
+
   const [registerData, setRegisterData] = useState({
     nickName: "",
     password: "",
     confirmPassword: "",
-
     email: "",
     photoUrl: "",
     isLoading: false,
@@ -98,15 +99,16 @@ function Register({ setAuth }) {
 
       await setDoc(doc(db, "users", registeredUser.user.uid), {
         isOnline: false,
-        email,
+        email: registeredUser.user.email.toLowerCase(),
         uid: registeredUser.user.uid,
         createdAt: serverTimestamp(),
         photoUrl: registeredUser.user.photoURL,
         nickName: registeredUser.user.displayName,
+        friends: [],
       });
       if (registeredUser) {
         setAuthStatus(true);
-        resetData()
+        resetData();
       }
     } catch (error) {
       console.log(error);
@@ -116,10 +118,20 @@ function Register({ setAuth }) {
           ...registerData,
           hasError: "Na podany adres email istnieje założone konto",
         });
+      } else if (code === "auth/invalid-email") {
+        setRegisterData({
+          ...registerData,
+          hasError:
+            "Na podany adres email nie znaleziono zarejestrowanego konta.",
+        });
       } else setRegisterData({ ...registerData, hasError: code });
     }
   };
-
+  if (authStatus && !isLoading) {
+    setTimeout(() => {
+      setAuth(false);
+    }, 3000);
+  }
   return (
     <form
       className={classes.formContainer}
@@ -199,44 +211,43 @@ function Register({ setAuth }) {
           />
         </div>
       )}
-
       {error && <p className={classes.errorInformation}>{error}</p>}
       {hasError && <p className={classes.errorInformation}>{hasError}</p>}
       <div className={classes.actions}>
         {!isLoading ? (
-          <>
-            <button
-              onClick={() => {setAuth(false)
-              resetData()}}
-              className={` ${classes.newAccBtn} ${classes.lgnBtn}`}
+          authStatus && !isLoading ? (
+            <p
+              onClick={() => setAuth(false)}
+              className={classes.successInformation}
             >
-              Powrót
-            </button>
-            <button
-              disabled={!formIsValid}
-              title={!formIsValid ? "Uzupełnij dane" : "Zarejestruj"}
-              className={classes.lgnBtn}
-              onClick={registerFormSubmitHandler}
-            >
-              Zarejestruj
-            </button>
-          </>
-        ) : !authStatus ? (
-          <Spinner />
-        ) : (
-          <div className={classes.okRegisterContainer}>
-            <p className={classes.okRegister}>
-              Sukces wróć do strony logowania, aby się zalogować
+              Zarejestrowano poprawnie, kliknij by wrócić do logowania lub
+              poczekaj chwilę
             </p>
-            <button
-              onClick={() => setAuth(true)}
-              className={` ${classes.newAccBtn} ${classes.lgnBtn}`}
-            >
-              Powrót
-            </button>
-          </div>
+          ) : (
+            <>
+              <button
+                onClick={() => {
+                  setAuth(false);
+                  resetData();
+                }}
+                className={` ${classes.newAccBtn} ${classes.lgnBtn}`}
+              >
+                Powrót
+              </button>
+              <button
+                disabled={!formIsValid}
+                title={!formIsValid ? "Uzupełnij dane" : "Zarejestruj"}
+                className={classes.lgnBtn}
+                onClick={registerFormSubmitHandler}
+              >
+                Zarejestruj
+              </button>
+            </>
+          )
+        ) : (
+          <Spinner />
         )}
-      </div>
+      </div>{" "}
     </form>
   );
 }

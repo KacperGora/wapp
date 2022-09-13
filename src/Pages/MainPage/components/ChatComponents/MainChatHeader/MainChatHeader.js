@@ -3,7 +3,7 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { MdOutlineCancel } from "react-icons/md";
 import Search from "../../Helpers/Search/Search";
 import classes from "./MainChatHeader.module.css";
-function MainChatHeader({ lastMsg, onSearch }) {
+function MainChatHeader({ lastMsg, onSearch, selectedUser }) {
   const [toSearch, setToSearch] = useState(false);
 
   return (
@@ -24,7 +24,7 @@ function MainChatHeader({ lastMsg, onSearch }) {
       ) : (
         <div className={classes.chatDetails}>
           <div>
-            <h3></h3>
+            <h3>{selectedUser}</h3>
             <p>
               Widziano ostatnio: {lastMsg?.createdAt?.toDate().toLocaleString()}
             </p>

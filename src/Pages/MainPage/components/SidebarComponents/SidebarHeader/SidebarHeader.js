@@ -13,11 +13,15 @@ function SidebarHeader({ setAddNewRoom, addNewRoom }) {
   const uid = auth?.currentUser?.uid;
   return (
     <header className={classes.heading}>
-      <Link to={`/profile/${uid}`}>
+      <Link className={classes.link} to={`/profile/${uid}`}>
         <div className={classes.imgBox}>
           <img src={auth.currentUser?.photoURL || noImg} alt="User avatar" />
         </div>
-      </Link>   
+        <div className={classes.userInfo}>
+          <h4>{auth.currentUser.displayName}</h4>
+          {/* <h4 className={classes.userId}>{auth.currentUser.uid}</h4> */}
+        </div>
+      </Link>
       <div className={classes.iconsBox}>
         <div title="Zmień status" className={classes.icon}>
           <HiOutlineStatusOnline />

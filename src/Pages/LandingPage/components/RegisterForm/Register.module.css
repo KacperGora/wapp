@@ -102,3 +102,8 @@
   text-transform: uppercase;
   text-align: center;
 }
+.successInformation {
+  color: green;
+  font-size: 1.2rem;
+  cursor: pointer;
+}

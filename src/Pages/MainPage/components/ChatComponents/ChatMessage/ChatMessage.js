@@ -1,18 +1,18 @@
 import React from "react";
-import {auth} from '../../../../../firebase'
+import { auth } from "../../../../../firebase";
 import classes from "./ChatMessage.module.css";
 function ChatMessage(props) {
-  const { text, uid, photoUrl, displayName, createdAt } = props.message;
-console.log();
+  const { text, to, photoUrl, nickName, createdAt } = props.message;
+console.log(to)
   const messageClass =
-    uid === auth.currentUser.uid ? classes.sent : classes.received;
+    to === auth.currentUser.uid ? classes.sent : classes.received;
 
   return (
     <div className={classes.singleMsg}>
       <div className={messageClass}>
         <p className={classes.msg}>{text}</p>
         <div className={classes.msgDetail}>
-          <p className={classes.author}>{displayName}</p>
+          <p className={classes.author}>{nickName}</p>
           <p className={classes.timeBox}>
             {createdAt?.toDate().toLocaleString()}
           </p>

@@ -39,12 +39,15 @@ const AddNewFriend = () => {
   const friendToBe = allUsers.filter((user) =>
     user.email?.toLowerCase().includes(userInput)
   );
+
   const loggedUser = auth.currentUser.email;
   const addNewFriendSubmitHandler = async (e) => {
     e.preventDefault();
     try {
       const reqRef = await addDoc(collection(db, "requests"), {
         from: loggedUser,
+        fromId: auth.currentUser.uid,
+        toId: friendToBe[0].uid,
         to: userInput.toLowerCase(),
         pending: true,
         status: "not confirmed",

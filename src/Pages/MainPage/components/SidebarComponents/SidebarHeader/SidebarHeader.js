@@ -24,17 +24,17 @@ function SidebarHeader({
           <img src={auth.currentUser?.photoURL || noImg} alt="User avatar" />
         </div>
         <div className={classes.userInfo}>
-          <h4>{auth.currentUser.displayName}</h4>
+          <h4>{auth.currentUser?.displayName}</h4>
         </div>
       </Link>
       <div className={classes.iconsBox}>
         <div
           onClick={() => setShowRequest(!showRequest)}
-          title="Zmień status"
+          title="Zaproszenia do znajomych"
           className={`${classes.icon} ${classes.request}`}
         >
           <HiOutlineUserAdd />
-          <div className={classes.badge}>{request.length}</div>
+          {request.length!==0 && <div className={classes.badge}>{request.length}</div>}
         </div>
         <div
           onClick={() => setAddNewRoom(!addNewRoom)}

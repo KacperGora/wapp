@@ -12,9 +12,9 @@ function ChatSendMessage({ id }) {
   const [progress, imageUrl, setImgUrl] = useUploadImage(file, "images");
   const [mediaLoading, setMediaLoading] = useState(false);
   const idMsg =
-    auth.currentUser.uid > id
-      ? `${auth.currentUser.uid + id}`
-      : `${id + auth.currentUser.uid}`;
+    auth?.currentUser?.uid > id
+      ? `${auth.currentUser?.uid + id}`
+      : `${id + auth.currentUser?.uid}`;
 
   const messageSendHandler = async (e) => {
     e.preventDefault();

@@ -3,7 +3,6 @@
   border: none;
   background-color: #d0cbc8;
   border-radius: 8px;
-
 }
 input:focus {
   outline: none;
@@ -11,10 +10,9 @@ input:focus {
 .icon {
   font-size: 1.6rem;
   color: #858585;
-  /* padding-right: 1.2rem; */
+
   z-index: 2;
   cursor: pointer;
-  position: relative;
 }
 
 .searchBox {
@@ -24,11 +22,8 @@ input:focus {
   background-color: #d0cbc8;
   border-radius: 8px;
   width: 90%;
-  
 }
 .searchContainer {
   display: flex;
   align-items: center;
-   
 }
-  

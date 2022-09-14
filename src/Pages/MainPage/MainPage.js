@@ -38,12 +38,7 @@ function MainPage() {
       const unsub = onSnapshot(q, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
           usersFriends.push(doc.data());
-          // if (friends) setFriends(doc.data());
-          // else {
-          //   setFriends((currState) => {
-          //     return [currState, doc.data()];
-          //   });
-          // }
+    
         });
 
         setFriends(usersFriends);
@@ -59,13 +54,13 @@ function MainPage() {
     );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        myRequestsArray.push(doc.data());
+        myRequestsArray.push({id: doc.id, data: doc.data()});
       });
       setMyRequest(myRequestsArray);
     });
     return () => unsubscribe();
   }, []);
-
+console.log(myRequest)
   return (
     <div className={classes.MainPageContainer}>
       <Navbar />

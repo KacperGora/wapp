@@ -1,0 +1,17 @@
+.request {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.2rem;
+}
+.actions {
+  display: flex;
+  gap: 1.2rem;
+}
+.icon {
+  cursor: pointer;
+  font-size: 1.6rem;
+  background-color: #008069;
+  color: white;
+  border-radius: 50%;
+}

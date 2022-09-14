@@ -2,13 +2,19 @@ import React from "react";
 import {
   HiOutlineChat,
   HiOutlineDotsVertical,
-  HiOutlineStatusOnline,
+  HiOutlineUserAdd,
 } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./SidebarHeader.module.css";
 import noImg from "../../../../../Assets/images/no-user-image.gif";
 import { auth } from "../../../../../firebase";
-function SidebarHeader({ setAddNewRoom, addNewRoom }) {
+function SidebarHeader({
+  setAddNewRoom,
+  addNewRoom,
+  request,
+  setShowRequest,
+  showRequest,
+}) {
   const navigate = useNavigate();
   const uid = auth?.currentUser?.uid;
   return (
@@ -19,12 +25,16 @@ function SidebarHeader({ setAddNewRoom, addNewRoom }) {
         </div>
         <div className={classes.userInfo}>
           <h4>{auth.currentUser.displayName}</h4>
-          {/* <h4 className={classes.userId}>{auth.currentUser.uid}</h4> */}
         </div>
       </Link>
       <div className={classes.iconsBox}>
-        <div title="Zmień status" className={classes.icon}>
-          <HiOutlineStatusOnline />
+        <div
+          onClick={() => setShowRequest(!showRequest)}
+          title="Zmień status"
+          className={`${classes.icon} ${classes.request}`}
+        >
+          <HiOutlineUserAdd />
+          <div className={classes.badge}>{request.length}</div>
         </div>
         <div
           onClick={() => setAddNewRoom(!addNewRoom)}

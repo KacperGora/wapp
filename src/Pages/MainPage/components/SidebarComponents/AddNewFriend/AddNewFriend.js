@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  arrayUnion,
-  collection,
-  doc,
-  onSnapshot,
-  updateDoc,
-  query,
-} from "firebase/firestore";
+import { MdPersonAddAlt } from "react-icons/md";
+import { collection, onSnapshot, query, addDoc } from "firebase/firestore";
 import { auth, db } from "../../../../../firebase";
+import classes from "./AddNewFriend.module.css";
 
 const AddNewFriend = () => {
   const [userInput, setUserInput] = useState();
@@ -32,23 +27,40 @@ const AddNewFriend = () => {
   // }, [allUsers, userInput]);
   useEffect(() => {
     if (
-      allUsers.filter((user) => user.email.toLowerCase().includes(userInput))
-        .length === 0
+      allUsers.filter((user) =>
+        user.email?.toLowerCase().includes(userInput?.toLowerCase())
+      ).length === 0 &&
+      userInput !== ""
     )
       setNoUser(true);
     else setNoUser(false);
   }, [allUsers, userInput]);
+
+  const friendToBe = allUsers.filter((user) =>
+    user.email?.toLowerCase().includes(userInput)
+  );
+  const loggedUser = auth.currentUser.email;
   const addNewFriendSubmitHandler = async (e) => {
     e.preventDefault();
-    const userRef = doc(db, "users", auth.currentUser.uid);
+    try {
+      const reqRef = await addDoc(collection(db, "requests"), {
+        from: loggedUser,
+        to: userInput.toLowerCase(),
+        pending: true,
+        status: "not confirmed",
+      });
+    } catch (error) {
+      console.log(error);
+    }
 
-    await updateDoc(userRef, {
-      friends: arrayUnion(userInput),
-    });
     setUserInput("");
   };
+
   return (
-    <form onSubmit={addNewFriendSubmitHandler}>
+    <form
+      className={classes.formContainer}
+      onSubmit={addNewFriendSubmitHandler}
+    >
       <label htmlFor="addNewFriend">Dodaj znajomego</label>
       <input
         title="Dodaj znajomego"
@@ -56,7 +68,9 @@ const AddNewFriend = () => {
         onChange={(e) => setUserInput(e.target.value)}
         value={userInput}
       />
-      <button disabled={noUser}>+</button>
+      <button className={classes.addAction} disabled={noUser}>
+        <MdPersonAddAlt />
+      </button>
       {noUser && <p>W bazie danych nie znaleziono użytkownika.</p>}
     </form>
   );

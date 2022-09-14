@@ -3,6 +3,7 @@ import classes from "./AddNewRoom.module.css";
 import { HiPlus } from "react-icons/hi";
 import { db } from "../../../../../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+
 function AddNewRoom({ isEmpty }) {
   const [newRoomName, setNewRoomName] = useState("");
   const newRoomSubmitHandler = async (e) => {
@@ -17,7 +18,6 @@ function AddNewRoom({ isEmpty }) {
       }
     }
     setNewRoomName("");
-   
   };
 
   return (

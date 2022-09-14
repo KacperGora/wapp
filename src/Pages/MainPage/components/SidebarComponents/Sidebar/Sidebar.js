@@ -5,10 +5,12 @@ import Search from "../../Helpers/Search/Search";
 import ListChat from "../ListChat/ListChat";
 import SidebarHeader from "../SidebarHeader/SidebarHeader";
 import AddNewFriend from "../AddNewFriend/AddNewFriend";
+import RequestList from "../RequestList/RequestList";
 
-function Sidebar({ users, setSelectedUser }) {
+function Sidebar({ users, setSelectedUser, request }) {
   const [searchValue, setSearchValue] = useState("");
   const [addNewRoom, setAddNewRoom] = useState(false);
+  const [showRequest, setShowRequest] = useState(false);
 
   const usersList = !searchValue
     ? users
@@ -19,7 +21,13 @@ function Sidebar({ users, setSelectedUser }) {
   return (
     <aside className={classes.container}>
       <div className={classes.chatTools}>
-        <SidebarHeader setAddNewRoom={setAddNewRoom} addNewRoom={addNewRoom} />
+        <SidebarHeader
+          setShowRequest={setShowRequest}
+          showRequest={showRequest}
+          request={request}
+          setAddNewRoom={setAddNewRoom}
+          addNewRoom={addNewRoom}
+        />
 
         {addNewRoom ? (
           <AddNewRoom />
@@ -30,10 +38,28 @@ function Sidebar({ users, setSelectedUser }) {
           />
         )}
       </div>
-      <div className={classes.chatList}>
-        <ListChat setSelectedUser={setSelectedUser} users={usersList} />
-      </div>
-      <AddNewFriend />
+       
+      {showRequest ? users.length !== 0 ? (
+        <section className={classes.chatList}>
+          <ListChat setSelectedUser={setSelectedUser} users={usersList} />
+        </section>
+      ) : (
+        <>
+          <h2 className={classes.noFriends}>
+            Wygląda na to że nie masz znajomych, wyszukaj ich za pomocą
+            wyszukwiarki
+          </h2>
+          <AddNewFriend />
+        </>
+      ): <RequestList request={request}/>}
+
+      {users.length > 0 ? (
+        <div className={classes.newFriend}>
+          <AddNewFriend />
+        </div>
+      ) : (
+        ""
+      )}
     </aside>
   );
 }

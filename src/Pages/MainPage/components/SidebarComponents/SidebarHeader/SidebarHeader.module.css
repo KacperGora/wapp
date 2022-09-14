@@ -7,10 +7,9 @@
 }
 .imgBox img {
   clip-path: circle();
-  margin: 1.2rem;
+  width: 6.4rem;
   padding: 0;
   cursor: pointer;
-  width: 6.4rem;
 }
 .icon {
   font-size: 2.4rem;
@@ -25,7 +24,7 @@
 .userInfo {
   color: rgb(84, 84, 84);
   font-size: 1.2rem;
-  margin-left: 2.4rem
+  margin-left: 2.4rem;
 }
 .link {
   text-decoration: none;
@@ -34,4 +33,19 @@
 }
 .userId {
   font-size: 0.8rem;
+}
+.request {
+  position: relative;
+}
+.badge {
+  position: absolute;
+  background-color: red;
+  font-size: 1.2rem;
+  border-radius: 100%;
+  width: 1.2rem;
+  height: 1.2rem;
+  text-align: center;
+  color: white;
+  top: -4px;
+  right: -8px;
 }

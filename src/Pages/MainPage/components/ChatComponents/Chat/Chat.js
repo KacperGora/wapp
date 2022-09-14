@@ -10,8 +10,7 @@ function Chat({ selectedUser }) {
   const { id } = useParams();
   const [messages, setMessages] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const scrollRef = useRef();
-  scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+ 
 
   useEffect(() => {
     const idMsg =
@@ -43,11 +42,9 @@ function Chat({ selectedUser }) {
         />{" "}
       </div>
       <div className={classes.container}>
-        <div ref={scrollRef}>
-          {messages.map((message) => (
-            <ChatMessage key={message.id} message={message} />
-          ))}
-        </div>
+        {messages.map((message) => (
+          <ChatMessage key={message.id} message={message} />
+        ))}
       </div>
     </aside>
   );

@@ -10,6 +10,7 @@ function MainPage() {
   const [friends, setFriends] = useState([]);
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState([]);
+  const [myRequest, setMyRequest] = useState([]);
 
   useEffect(() => {
     let user = [];
@@ -26,11 +27,14 @@ function MainPage() {
     });
     return () => unsubscribe();
   }, []);
-console.log(user)
+  console.log(friends);
   useEffect(() => {
     const usersFriends = [];
     user?.friends?.forEach((friend) => {
-      const q = query(collection(db, `users`), where("email", "==", friend.toLowerCase()));
+      const q = query(
+        collection(db, `users`),
+        where("email", "==", friend.toLowerCase())
+      );
       const unsub = onSnapshot(q, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
           usersFriends.push(doc.data());
@@ -41,16 +45,32 @@ console.log(user)
           //   });
           // }
         });
-        console.log(usersFriends);
+
         setFriends(usersFriends);
       });
     });
   }, [user]);
-  console.log(friends);
+
+  useEffect(() => {
+    let myRequestsArray = [];
+    const q = query(
+      collection(db, `requests`),
+      where("to", "in", [auth.currentUser.email])
+    );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        myRequestsArray.push(doc.data());
+      });
+      setMyRequest(myRequestsArray);
+    });
+    return () => unsubscribe();
+  }, []);
+
   return (
     <div className={classes.MainPageContainer}>
       <Navbar />
-      <MainContent users={friends} />
+
+      <MainContent request={myRequest} users={friends} />
     </div>
   );
 }

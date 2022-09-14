@@ -1,6 +1,6 @@
 .navbarContainer {
   height: 15rem;
-  width: 140rem;
+  max-width: 130rem;
   margin: 0 auto;
   background-color: #008069;
   padding: 3.2rem;

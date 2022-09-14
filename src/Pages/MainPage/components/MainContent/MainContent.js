@@ -6,16 +6,20 @@ import ChatSendMessage from "../NewMessageComponents/ChatSendMessage/ChatSendMes
 import Sidebar from "../SidebarComponents/Sidebar/Sidebar";
 
 import classes from "./MainContent.module.css";
-function MainContent({ users }) {
+function MainContent({ users, request }) {
   const { id } = useParams();
   const [selectedUser, setSelectedUser] = useState("");
-
+console.log(request)
   return (
     <div className={classes.loginContainer}>
-      <Sidebar setSelectedUser={setSelectedUser} users={users} />
+      <Sidebar
+        request={request}
+        setSelectedUser={setSelectedUser}
+        users={users}
+      />
       <div className={classes.chatContainer}>
         <Chat selectedUser={selectedUser} users={users} />
-        <ChatSendMessage id={id} />
+        <ChatSendMessage className={classes.newMessage} id={id} />
       </div>
     </div>
   );

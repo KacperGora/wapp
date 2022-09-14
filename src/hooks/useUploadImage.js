@@ -2,13 +2,13 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { storage } from "../firebase";
 
-const useUploadImage = (file) => {
+const useUploadImage = (file, path) => {
   const [progress, setProgress] = useState(0);
   const [imageUrl, setImgUrl] = useState(null);
   useEffect(() => {
     const uploadFiles = (file) => {
       if (!file) return;
-      const storageRef = ref(storage, `/avatars/${file.name}`);
+      const storageRef = ref(storage, `/${path}/${file.name}`);
       const uploadTask = uploadBytesResumable(storageRef, file);
       uploadTask.on(
         "state_changed",
@@ -25,7 +25,7 @@ const useUploadImage = (file) => {
       );
     };
     uploadFiles(file);
-  }, [file]);
-  return [progress, imageUrl];
+  }, [file, path]);
+  return [progress, imageUrl, setImgUrl];
 };
-export default useUploadImage
+export default useUploadImage;
